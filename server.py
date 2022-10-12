@@ -1,5 +1,6 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Api, Resource
+from server_db import table_users
 
 app = Flask(__name__)
 api = Api()
@@ -7,13 +8,13 @@ api = Api()
 
 class Main(Resource):
     def get(self):
-        return {"db": "addrebook", "sd": 56}
+        return jsonify(table_users)
 
 
-api.add_resource(Main, "/api/server")
+api.add_resource(Main, "/api/users")
 
 api.init_app(app)
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000, host="127.0.0.1")
+    app.run(debug=True, port=3000, host="127.0.0.1")
